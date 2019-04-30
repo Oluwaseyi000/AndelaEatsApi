@@ -4,13 +4,13 @@ jobs:
     docker:
       # specify the version you desire here
       # use `-browsers` prefix for selenium tests, e.g. `3.6.1-browsers`
-      - image: circleci/python:3.6.1
+      - image: circleci/python:3.6.5
         environment:
-          REDIS_HOST: localhost
-          REDIS_PORT: 6379
+          REDIS_HOST: "ec2-3-92-100-235.compute-1.amazonaws.com"
+          REDIS_PORT: 19399
           REDIS_DB: 0
-          REDIS_USER: circleci
-          REDIS_PASSWORD: circleci
+          REDIS_PASSWORD: "p795dcfa87682842d5faacc515c5739e4f7221618c90c7c32c4dc2004c6837869"
+          REDIS_USER: "h"
           ANDELA_API_TOKEN: "89S07r4pQ1yTQIQTxfyvHhwPyfDpFg"
           API_AUTH_URL: http://api-staging.andela.com/api/v1
           FLASK_APP: run
@@ -27,13 +27,9 @@ jobs:
           POSTGRES_DB: circle_test
           POSTGRES_PASSWORD: ""
 
-      - image: circleci/redis:5.0.3
-        environment:
-          REDIS_USER: circleci
-          REDIS_DB: 0
-          REDIS_HOST: localhost
-          REDIS_PORT: 7001
-          REDIS_PASSWORD: circleci
+#      - image: circleci/redis:5.0.3
+#        environment:
+#          REDIS_URL: redis://localhost:6379/0
 
     working_directory: ~/andelaeatapi
 

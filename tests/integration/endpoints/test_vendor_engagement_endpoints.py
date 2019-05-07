@@ -251,7 +251,6 @@ class TestVendorEngagementEndpoints(BaseTestCase):
 
 		response = self.client().get(self.make_url(f'/engagements/past/{location.id}'), headers=self.headers())
 		response_json = self.decode_from_json_string(response.data.decode('utf-8'))
-		print('LLLLLLL', response_json)
 
 		self.assert404(response)
 		self.assertEqual(response_json['msg'], 'No past engagement for this location')

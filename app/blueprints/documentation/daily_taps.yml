@@ -42,22 +42,7 @@ definitions:
               type: string
               format: date
               example: 2019-04-25
-            users:
-              type: array
-              items:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                  name:
-                    type: string
-                    example: Johnny Walker
-                  userId:
-                    type: string
-                  slackId:
-                    type: string
-                  session:
-                    type: string
+
 
 responses:
   200:

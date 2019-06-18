@@ -40,12 +40,15 @@ attach_listen_type(tables_logged_after_every_delete, 'after_delete')
 
 def model_id_generator(mapper, connection, target):
     """A function to generate unique identifiers on insert."""
+    import pdb
+    pdb.set_trace()
+
     push_id = PushID()
     next_id = push_id.next_id()
 
     target.slack_id = target.slack_id if target.slack_id else next_id
 
-    target.user_id =  target.user_id if target.user_id else target.slack_id
+    target.user_id = target.user_id if target.user_id else target.slack_id
 
 
 for table in generate_id_tables:

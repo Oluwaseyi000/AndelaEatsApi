@@ -20,7 +20,7 @@ def list_all_users():
     return user_controller.list_all_users()
 
 
-@user_blueprint.route('/<int:id>/', methods=['DELETE'])
+@user_blueprint.route('/<string:id>/', methods=['DELETE'])
 @Auth.has_permission('delete_user')
 @swag_from('documentation/delete_user.yml')
 def delete_user(id):
@@ -44,7 +44,7 @@ def list_user(slack_id):
     return user_controller.list_user(slack_id)
 
 
-@user_blueprint.route('/<int:user_id>', methods=['PUT', 'PATCH'])
+@user_blueprint.route('/<string:user_id>', methods=['PUT', 'PATCH'])
 @Auth.has_permission('update_user')
 @Security.validator(
     ['slackId|optional', 'roleId|optional', 'firstName|optional', 'lastName|optional',

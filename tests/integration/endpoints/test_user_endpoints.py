@@ -226,7 +226,7 @@ class TestUserEndpoints(BaseTestCase):
 
         user_data = dict(firstName="Andela", lastName="Eats", userId="user_id_1")
 
-        response = self.client().put(self.make_url("/users/" + str(user.id + 1)), headers=self.headers(),
+        response = self.client().put(self.make_url("/users/" + 'fgbfdf'), headers=self.headers(),
                                       data=self.encode_to_json_string(user_data))
 
         response_json = self.decode_from_json_string(response.data.decode('utf-8'))

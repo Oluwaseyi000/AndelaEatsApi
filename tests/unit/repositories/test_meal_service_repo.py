@@ -19,6 +19,6 @@ class TestMealServiceRepo(BaseTestCase):
             )
 
         self.assertIsInstance(new_meal_service, MealService)
-        self.assertEqual(new_meal_service.user_id, meal_service.user_id)
+        self.assertEqual(new_meal_service.user_id, str(meal_service.user_id))
         self.assertEqual(new_meal_service.session_id, meal_service.session_id)
         self.assertEqual(new_meal_service.date, meal_service.date)

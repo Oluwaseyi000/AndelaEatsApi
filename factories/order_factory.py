@@ -5,6 +5,7 @@ from app.models.order import Order
 from app.utils.enums import Channels
 from datetime import date, timedelta
 from tests.base_test_case import BaseTestCase
+from app.utils.id_generator import PushID
 
 
 class OrderFactory(factory.alchemy.SQLAlchemyModelFactory):
@@ -12,8 +13,8 @@ class OrderFactory(factory.alchemy.SQLAlchemyModelFactory):
     class Meta:
         model = Order
         sqlalchemy_session = db.session
-
-    id = factory.sequence(lambda n: n)
+        
+    id = factory.sequence(lambda n :PushID().next_id())
     channel = Channels.web
     date_booked_for = date.today() + timedelta(days=1)
     date_booked = date.today()

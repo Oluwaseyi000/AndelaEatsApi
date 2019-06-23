@@ -1,13 +1,16 @@
-from app.utils import db
-from app.models import Location, Role, UserRole, Permission
-from sqlalchemy.exc import SQLAlchemyError
-from .seed_data import location_data, role_data, user_role_data, permission_data
-from .test_data import test_data
 from collections import OrderedDict
-from termcolor import colored
-from sqlalchemy import text
-from sqlalchemy.exc import OperationalError
 
+from sqlalchemy import text
+from sqlalchemy.exc import OperationalError, SQLAlchemyError
+from termcolor import colored
+
+from app.models import Location, Permission, Role, UserRole
+from app.utils import db
+from app.utils.id_generator import PushID
+
+from .seed_data import (location_data, permission_data, role_data,
+                        user_role_data)
+from .test_data import test_data
 
 SEED_OPTIONS = ('location', 'role', 'user_role', 'permission')
 
@@ -42,6 +45,7 @@ def truncate_db():
 
 
 def bulk_insert(model, data):
+    data = clean_data(data)
     try:
         db.session.bulk_insert_mappings(model, data)
         db.session.commit()
@@ -49,6 +53,11 @@ def bulk_insert(model, data):
         db.session.rollback()
         raise Exception(colored(error, 'red'))
 
+
+def clean_data(data):
+    for item in data:
+        item.setdefault('id', PushID().next_id())
+    return data
 
 def seed_db(table_name, testing):
     start_insert = True

@@ -1,6 +1,8 @@
 import factory
-from app.utils import db
+
 from app.models.role import Role
+from app.utils import db
+from app.utils.id_generator import PushID
 
 
 class RoleFactory(factory.alchemy.SQLAlchemyModelFactory):
@@ -9,8 +11,6 @@ class RoleFactory(factory.alchemy.SQLAlchemyModelFactory):
 		model = Role
 		sqlalchemy_session = db.session
 	
-	id = factory.Sequence(lambda n: n)
+	id = factory.sequence(lambda n :PushID().next_id())
 	name = factory.Faker('word')
 	help = 'A Help Message'
-		
-			

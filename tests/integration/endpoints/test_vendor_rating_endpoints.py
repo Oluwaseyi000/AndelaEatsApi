@@ -237,7 +237,7 @@ class TestVendorRatingEndpoints(BaseTestCase):
 
         self.assertEqual(response.status_code, 201)
         self.assertEqual(response_json['msg'], 'Rating created')
-        self.assertEqual(response_json['payload']['rating']['id'], 1)
+        self.assertEqual(response_json['payload']['rating']['vendorId'], vendor.id)
 
     def test_rating_today_meal_fails(self):
         vendor = VendorFactory.create()

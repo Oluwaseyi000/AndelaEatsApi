@@ -21,7 +21,7 @@ class TestMealSessionRepo(BaseTestCase):
             )
 
         self.assertIsInstance(new_meal_session, MealSession)
-        self.assertEqual(new_meal_session.location_id, meal_session.location_id)
+        self.assertEqual(new_meal_session.location_id, str(meal_session.location_id))
         self.assertEqual(new_meal_session.name, meal_session.name)
         self.assertEqual(new_meal_session.start_time, meal_session.start_time)
         self.assertEqual(new_meal_session.stop_time, meal_session.stop_time)

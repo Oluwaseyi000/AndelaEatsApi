@@ -28,7 +28,7 @@ def create():
 
 
 
-@meal_session_blueprint.route('/session/<int:meal_session_id>', methods=['PUT'])
+@meal_session_blueprint.route('/session/<string:meal_session_id>', methods=['PUT'])
 @Auth.has_role('admin')
 @Security.validator([
     'name|required:enum_MealSessionNames',
@@ -55,7 +55,7 @@ def list_sessions():
 
 
 
-@meal_session_blueprint.route('/session/<int:meal_session_id>', methods=['DELETE'])
+@meal_session_blueprint.route('/session/<string:meal_session_id>', methods=['DELETE'])
 @Auth.has_role('admin')
 @swag_from('documentation/delete_meal_session.yml')
 def delete(meal_session_id):

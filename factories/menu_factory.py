@@ -5,7 +5,7 @@ from datetime import date, datetime, timedelta
 from app.models.menu import Menu
 from factories.meal_item_factory import MealItemFactory
 from factories.vendor_engagement_factory import VendorEngagementFactory
-
+from app.utils.id_generator import PushID
 
 class MenuFactory(factory.alchemy.SQLAlchemyModelFactory):
 
@@ -13,7 +13,7 @@ class MenuFactory(factory.alchemy.SQLAlchemyModelFactory):
 		model = Menu
 		sqlalchemy_session = db.session
 
-	id = factory.Sequence(lambda n: n)
+	id = factory.sequence(lambda n :PushID().next_id())
 	
 	meal_period = 'lunch'
 	allowed_side = 1

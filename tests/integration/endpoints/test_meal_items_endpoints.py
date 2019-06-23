@@ -194,7 +194,7 @@ class TestMealItemEndpoints(BaseTestCase):
 		self.assert200(response)
 		self.assertJSONKeyPresent(payload, 'mealItem')
 		self.assertJSONKeysPresent(payload['mealItem'], 'name', 'mealType', 'image')
-		self.assertEqual(int(payload['mealItem']['id']), meal_item.id)
+		self.assertEqual(payload['mealItem']['id'], meal_item.id)
 		self.assertEqual(payload['mealItem']['name'], meal_item.name)
 		self.assertEqual(payload['mealItem']['mealType'], meal_item.meal_type)
 

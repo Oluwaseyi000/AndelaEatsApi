@@ -134,7 +134,7 @@ class TestVendorEndpoints(BaseTestCase):
 		user_role = UserRoleFactory.create(user_id=user_id, role_id=role.id)
 
 		response = self.client().delete(self.make_url(f'/vendors/-576A'), headers=self.headers())
-
+		import pdb; pdb.set_trace()
 		self.assert404(response)
 
 	def test_delete_vendor_with_associated_engagement(self):

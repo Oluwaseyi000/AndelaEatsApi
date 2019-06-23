@@ -66,4 +66,4 @@ class TestMealSessionController(BaseTestCase):
                 mock_request_params_return_value[3])
             self.assertEqual(
                 response_json['payload']['mealSession']['locationId'],
-                mock_request_params_return_value[4])
+                str(mock_request_params_return_value[4]))

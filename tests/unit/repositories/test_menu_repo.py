@@ -14,10 +14,10 @@ class TestMenuRepo(BaseTestCase):
     menu = MenuFactory.build()
     new_menu = self.repo.new_menu(
       menu.date.strftime('%Y-%m-%d'), menu.meal_period, 1, menu.allowed_side,
-      menu.allowed_protein, [1,2], [3,4], 1,1
+      menu.allowed_protein, [1, 2], [3, 4], 1, 1
     )
 
     self.assertIsInstance(new_menu, Menu)
-    self.assertEqual(new_menu.allowed_protein, menu.allowed_protein)
+    self.assertEqual(new_menu.allowed_protein, str(menu.allowed_protein))
     self.assertEqual(new_menu.allowed_side, menu.allowed_protein)
     self.assertEqual(new_menu.meal_period, menu.meal_period)

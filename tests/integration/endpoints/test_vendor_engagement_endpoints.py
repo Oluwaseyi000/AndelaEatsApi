@@ -218,6 +218,7 @@ class TestVendorEngagementEndpoints(BaseTestCase):
 		response_json = self.decode_from_json_string(response.data.decode('utf-8'))
 
 		self.assert200(response)
+		import pdb; pdb.set_trace()
 		self.assertEqual(response_json['msg'], 'OK')
 		self.assertEqual(response_json['payload']['engagements'][0]['vendor']['id'], vendor.id)
 

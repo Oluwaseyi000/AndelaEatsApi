@@ -154,7 +154,7 @@ class TestRoleEndpoints(BaseTestCase):
 
 		response = self.client().get(self.make_url(f'/roles/user/{user_role.id}'), headers=self.headers())
 		response_json = self.decode_from_json_string(response.data.decode('utf-8'))
-
+		import pdb; pdb.set_trace()
 		self.assert200(response)
 		self.assertEqual(response_json['msg'], 'OK')
 		self.assertEqual(response_json['payload']['user_role'][0]['id'], user_role.id)

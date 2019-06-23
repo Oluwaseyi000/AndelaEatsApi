@@ -45,7 +45,7 @@ class TestReportsEndpoints(BaseTestCase):
         engagement = VendorEngagementFactory.create(vendor_id=vendor.id)
         menu = MenuFactory.create(vendor_engagement_id=engagement.id)
         OrderFactory.create(menu_id=menu.id)
-        OrderFactory.create(menu_id=menu.id - 1)
+        OrderFactory.create(menu_id=menu.id)
 
         recent_date = datetime.datetime.now().date() + datetime.timedelta(7)
 

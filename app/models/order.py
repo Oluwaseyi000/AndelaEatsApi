@@ -24,5 +24,5 @@ class Order(BaseModel):
 # many to many relationship between meal item and order
 meal_item_orders = db.Table(
     'meal_item_orders',
-    db.Column('order_id', db.SmallInteger, db.ForeignKey('orders.id'), nullable=False),
-    db.Column('meal_item_id', db.SmallInteger, db.ForeignKey('meal_items.id'), nullable=False))
+    db.Column('order_id', db.String(80), db.ForeignKey('orders.id'), nullable=False),
+    db.Column('meal_item_id', db.String(80), db.ForeignKey('meal_items.id'), nullable=False))

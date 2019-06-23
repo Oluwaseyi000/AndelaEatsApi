@@ -14,7 +14,7 @@ def list_engagements():
     return vendor_engagement_controller.list_vendor_engagements()
 
 
-@engagement_blueprint.route('/vendor/<int:vendor_id>', methods=['GET'])
+@engagement_blueprint.route('/vendor/<string:vendor_id>', methods=['GET'])
 @swag_from('documentation/get_all_vendor_engagements_by_vendor_id.yml')
 def list_engagements_by_vendor(vendor_id):
     return vendor_engagement_controller.list_vendor_engagements_by_vendor(vendor_id)
@@ -26,7 +26,7 @@ def upcoming_engagements():
     return vendor_engagement_controller.upcoming_vendor_engagements()
 
 
-@engagement_blueprint.route('/<int:engagement_id>', methods=['GET'])
+@engagement_blueprint.route('/<string:engagement_id>', methods=['GET'])
 @swag_from('documentation/get_vendor_engagement_by_id.yml')
 def get_engagements(engagement_id):
     return vendor_engagement_controller.get_vendor_engagement(engagement_id)
@@ -39,20 +39,20 @@ def create_engagement():
     return vendor_engagement_controller.create_vendor_engagement()
 
 
-@engagement_blueprint.route('/<int:engagement_id>', methods=['PUT', 'PATCH'])
+@engagement_blueprint.route('/<string:engagement_id>', methods=['PUT', 'PATCH'])
 @swag_from('documentation/update_engagement.yml')
 def update_engagement(engagement_id):
     return vendor_engagement_controller.update_vendor_engagement(engagement_id)
 
 
-@engagement_blueprint.route('/<int:engagement_id>', methods=['DELETE'])
+@engagement_blueprint.route('/<string:engagement_id>', methods=['DELETE'])
 @Auth.has_permission('delete_engagement')
 @swag_from('documentation/delete_engagement.yml')
 def delete_engagement(engagement_id):
     return vendor_engagement_controller.delete_engagement(engagement_id)
 
 
-@engagement_blueprint.route('/past/<int:location_id>', methods=['GET'])
+@engagement_blueprint.route('/past/<string:location_id>', methods=['GET'])
 @swag_from('documentation/immediate_past_vendor.yml')
 def immediate_past_engagements(location_id):
     return vendor_engagement_controller.immediate_past_engagement(location_id)

@@ -14,7 +14,7 @@ def list_locations():
 	return location_controller.list_locations()
 
 
-@location_blueprint.route('/<int:location_id>', methods=['GET'])
+@location_blueprint.route('/<string:location_id>', methods=['GET'])
 @swag_from('documentation/get_single_location.yml')
 def get_location(location_id):
 	return location_controller.get_location(location_id)
@@ -27,14 +27,14 @@ def create_location():
 	return location_controller.create_location()
 
 
-@location_blueprint.route('/<int:location_id>', methods=['PUT', 'PATCH'])
+@location_blueprint.route('/<string:location_id>', methods=['PUT', 'PATCH'])
 @Security.validator(['name|required', 'zone|required'])
 @swag_from('documentation/update_location.yml')
 def update_location(location_id):
 	return location_controller.update_location(location_id)
 
 
-@location_blueprint.route('/<int:location_id>', methods=['DELETE'])
+@location_blueprint.route('/<string:location_id>', methods=['DELETE'])
 @swag_from('documentation/delete_location.yml')
 def delete_location(location_id):
 	return location_controller.delete_location(location_id)

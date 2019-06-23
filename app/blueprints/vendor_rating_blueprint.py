@@ -19,7 +19,7 @@ def list_ratings(menu_date):
     return vendor_rating_controller.list_ratings(menu_date)
 
 
-@rating_blueprint.route('/<int:rating_id>', methods=['GET'])
+@rating_blueprint.route('/<string:rating_id>', methods=['GET'])
 @Auth.has_permission('view_ratings')
 @swag_from('documentation/get_vendor_rating_by_id.yml')
 def get_vendor_rating(rating_id):
@@ -40,7 +40,7 @@ def create_order_rating():
     return vendor_rating_controller.create_order_rating()
 
 
-@rating_blueprint.route('/<int:rating_id>', methods=['PUT', 'PATCH'])
+@rating_blueprint.route('/<string:rating_id>', methods=['PUT', 'PATCH'])
 @Security.validator(['rating|int'])
 @swag_from('documentation/update_vendor_rating.yml')
 def update_rating(rating_id):

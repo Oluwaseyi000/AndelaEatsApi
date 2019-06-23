@@ -29,7 +29,7 @@ def list_orders_date_range(start_date, end_date):
 	return order_controller.list_orders_date_range(start_date, end_date)
 
 
-@order_blueprint.route('/<int:order_id>', methods=['GET'])
+@order_blueprint.route('/<string:order_id>', methods=['GET'])
 @swag_from('documentation/get_order_by_id.yml')
 def get_order(order_id):
 	return order_controller.get_order(order_id)
@@ -71,7 +71,7 @@ def create_order():
 	return order_controller.create_order()
 
 
-@order_blueprint.route('/<int:order_id>', methods=['PUT'])
+@order_blueprint.route('/<string:order_id>', methods=['PUT'])
 @Security.validator([
 	'dateBookedFor|required:date', 'channel|string', 'menuId|optional:int',
 	'mealPeriod|required:string', 'mealItems|required:list_int'])
@@ -80,7 +80,7 @@ def update_order(order_id):
 	return order_controller.update_order(order_id)
 
 
-@order_blueprint.route('/<int:order_id>', methods=['DELETE'])
+@order_blueprint.route('/<string:order_id>', methods=['DELETE'])
 @swag_from('documentation/delete_single_order.yml')
 def delete_order(order_id):
 	return order_controller.delete_order(order_id)

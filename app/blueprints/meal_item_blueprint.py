@@ -23,7 +23,7 @@ def list_meals():
 # 	return meal_item_controller.list_meals_page(page_id, meals_per_page)
 
 
-@meal_item_blueprint.route('/<int:meal_item_id>', methods=['GET'])
+@meal_item_blueprint.route('/<string:meal_item_id>', methods=['GET'])
 @Auth.has_permission('view_meal_item')
 @swag_from('documentation/get_single_meal_item.yml')
 def get_meal(meal_item_id):
@@ -38,7 +38,7 @@ def create_meal():
 	return meal_item_controller.create_meal()
 
 
-@meal_item_blueprint.route('/<int:meal_item_id>', methods=['PATCH', 'PUT'])
+@meal_item_blueprint.route('/<string:meal_item_id>', methods=['PATCH', 'PUT'])
 @Security.validator(['mealName|optional:string', 'image|optional:url', 'mealType|optional:enum_MealTypes'])
 @Auth.has_permission('update_meal_item')
 @swag_from('documentation/update_single_meal_item.yml')
@@ -46,7 +46,7 @@ def update_meal(meal_item_id):
 	return meal_item_controller.update_meal(meal_item_id)
 
 
-@meal_item_blueprint.route('/<int:meal_item_id>', methods=['DELETE'])
+@meal_item_blueprint.route('/<string:meal_item_id>', methods=['DELETE'])
 @Auth.has_permission('delete_meal_item')
 @swag_from('documentation/delete_single_meal_item.yml')
 def delete_meal(meal_item_id):

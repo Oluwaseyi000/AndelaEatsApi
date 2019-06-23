@@ -284,8 +284,10 @@ class TestOrderEndpoints(BaseTestCase):
         data = {
             'channel': 'slack', 'mealPeriod': 'lunch',
             'dateBookedFor': order2.date_booked_for.strftime('%Y-%m-%d'), 'mealItems': meal_items}
+        
         response = self.client().put(
             self.make_url('/orders/{}'.format(order1.id)), data=self.encode_to_json_string(data), headers=self.headers())
+        import pdb; pdb.set_trace()
         response_json = self.decode_from_json_string(response.data.decode('utf-8'))
         payload = response_json['payload']
 
@@ -387,7 +389,7 @@ class TestOrderEndpoints(BaseTestCase):
 
         self.assert200(response)
         self.assertEqual(response_json['msg'], 'OK')
-        self.assertEqual(response_json['payload']['orders'][0]['id'], order.id)
+        self.assertEqual(response_json['payload']['orders'][0]['id'], str(order.id))
 
     @patch('app.controllers.order_controller.AndelaService.get_user_by_email_or_id')
     def test_get_order_by_user_id_date_range_endpoint(self, mock_andela_get_user_by_email):

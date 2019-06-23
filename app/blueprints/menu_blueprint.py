@@ -26,7 +26,7 @@ def create_menu():
 	return menu_controller.create_menu()
 
 
-@menu_blueprint.route('/<int:menu_id>', methods=['DELETE'])
+@menu_blueprint.route('/<string:menu_id>', methods=['DELETE'])
 @Auth.has_permission('delete_menu')
 @swag_from('documentation/delete_menu.yml')
 def delete_menu(menu_id):
@@ -57,7 +57,7 @@ def list_menu_range(meal_period, start_date, end_date):
 	return menu_controller.list_menus_range(meal_period, start_date, end_date)
 
 
-@menu_blueprint.route('/<int:menu_id>', methods=['PATCH', 'PUT'])
+@menu_blueprint.route('/<string:menu_id>', methods=['PATCH', 'PUT'])
 @Auth.has_permission('update_menu')
 @Security.validator([
 	'sideItems|exists|meal_item|id',

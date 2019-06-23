@@ -1,7 +1,5 @@
 from sqlalchemy import event
 from app.utils.id_generator import PushID
-
-
 from .location import Location
 from .vendor import Vendor
 from .vendor_engagement import VendorEngagement
@@ -30,7 +28,9 @@ tables_logged_after_every_update = [Vendor, VendorEngagement, MealItem, Menu, Fa
 tables_logged_after_every_delete = [Vendor, VendorEngagement, MealItem, Menu, Faq,
                                     Role, Permission, UserRole, Location, VendorRating, Order,
                                     MealSession]
-generate_id_tables = (User,)
+tables = [Vendor, VendorEngagement, MealItem, Menu, Faq,
+          Role, Permission, UserRole, Location, Order, VendorRating,
+          MealSession, About, Activity, User, MealService]
 
 # attach all listeners to each admin table
 attach_listen_type(tables_logged_after_every_insert, 'after_insert')
@@ -45,8 +45,18 @@ def model_id_generator(mapper, connection, target):
 
     target.slack_id = target.slack_id if target.slack_id else next_id
 
-    target.user_id =  target.user_id if target.user_id else target.slack_id
+    target.user_id = target.user_id if target.user_id else target.slack_id
 
 
-for table in generate_id_tables:
-    event.listen(table, 'before_insert', model_id_generator)
+def primary_id_generator(mapper, connection, target):
+    push_id = PushID()
+    next_id = push_id.next_id()
+    target.id = target.id if target.id else next_id
+
+
+# attach listener that generates slack and user id
+event.listen(User, 'before_insert', model_id_generator)
+
+# attach listeners that generate primary key
+for table in tables:
+    event.listen(table, 'before_insert', primary_id_generator)

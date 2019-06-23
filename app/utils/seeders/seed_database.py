@@ -42,6 +42,7 @@ def truncate_db():
 
 
 def bulk_insert(model, data):
+    data = clean_data(data)
     try:
         db.session.bulk_insert_mappings(model, data)
         db.session.commit()
@@ -49,6 +50,11 @@ def bulk_insert(model, data):
         db.session.rollback()
         raise Exception(colored(error, 'red'))
 
+
+def clean_data(data):
+    for item in data:
+        item.setdefault('id', PushID().next_id())
+    return data
 
 def seed_db(table_name, testing):
     start_insert = True

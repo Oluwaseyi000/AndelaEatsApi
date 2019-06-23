@@ -4,8 +4,8 @@ from .base_model import BaseModel, db
 class VendorEngagement(BaseModel):
 	__tablename__ = 'vendor_engagements'
 	
-	vendor_id = db.Column(db.Integer(), db.ForeignKey('vendors.id'))
-	location_id = db.Column(db.Integer(), db.ForeignKey('locations.id'), default=1)
+	vendor_id = db.Column(db.String(80), db.ForeignKey('vendors.id'))
+	location_id = db.Column(db.String(80), db.ForeignKey('locations.id'), default=1)
 	start_date = db.Column(db.Date, nullable=False)
 	end_date = db.Column(db.Date, nullable=True)
 	status = db.Column(db.Integer(), nullable=False, default=1)

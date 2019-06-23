@@ -1,13 +1,14 @@
-from app.utils import db
-from sqlalchemy.exc import SQLAlchemyError
 from datetime import datetime
-from app.utils import to_camel_case
 
+from sqlalchemy.exc import SQLAlchemyError
+
+from app.models import PushID
+from app.utils import db, to_camel_case
 
 class BaseModel(db.Model):
     __abstract__ = True
 
-    id = db.Column(db.String(80), primary_key=True)
+    id = db.Column(db.String(80), primary_key=True,default=PushID.next_id())
     is_deleted = db.Column(db.Boolean, default=False, nullable=False)
     created_at = db.Column(db.DateTime(), nullable=False, default=datetime.now())
     updated_at = db.Column(db.DateTime(), nullable=False, default=datetime.now(), onupdate=datetime.now())

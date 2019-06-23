@@ -6,7 +6,7 @@ from .base_model import BaseModel, db
 class VendorRating(BaseModel):
 	__tablename__='vendor_ratings'
 
-	vendor_id = db.Column(db.Integer(), db.ForeignKey('vendors.id'))
+	vendor_id = db.Column(db.String(80), db.ForeignKey('vendors.id'))
 	user_id = db.Column(db.String(100))
 	comment = db.Column(db.String(1000), nullable=True)
 	service_date = db.Column(db.Date())
@@ -14,7 +14,7 @@ class VendorRating(BaseModel):
 	channel = db.Column(db.String(100))
 	rating_type = db.Column(db.Enum(RatingType))
 	type_id = db.Column(db.Integer(), default=0)
-	engagement_id = db.Column(db.Integer(), db.ForeignKey('vendor_engagements.id'))
+	engagement_id = db.Column(db.String(80), db.ForeignKey('vendor_engagements.id'))
 	vendor = db.relationship('Vendor', lazy=False)
 	engagement = db.relationship('VendorEngagement', lazy=False)
-	main_meal_id = db.Column(db.Integer(), db.ForeignKey('meal_items.id'), nullable=True)
+	main_meal_id = db.Column(db.String(80), db.ForeignKey('meal_items.id'), nullable=True)

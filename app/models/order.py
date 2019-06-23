@@ -14,10 +14,10 @@ class Order(BaseModel):
     meal_period = db.Column(db.Enum(MealPeriods))
     order_status = db.Column(db.Enum(OrderStatus))
     has_rated = db.Column(db.Boolean, default=False)
-    menu_id = db.Column(db.Integer(), db.ForeignKey('menus.id'))
+    menu_id = db.Column(db.String(80), db.ForeignKey('menus.id'))
     meal_item_orders = db.relationship('MealItem', secondary='meal_item_orders', lazy=False,
                                        backref=db.backref('orders', lazy=True))
-    location_id = db.Column(db.Integer(), db.ForeignKey('locations.id'), default=1)
+    location_id = db.Column(db.String(80), db.ForeignKey('locations.id'), default=1)
     location = db.relationship('Location', lazy=False)
 
 

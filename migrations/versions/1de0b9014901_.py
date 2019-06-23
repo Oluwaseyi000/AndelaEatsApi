@@ -8,7 +8,6 @@ Create Date: 2019-06-23 10:00:00.352203
 from alembic import op
 import sqlalchemy as sa
 from sqlalchemy.dialects import postgresql
-from sqlalchemy import Table, MetaData
 from sqlalchemy.engine import reflection
 from run import db
 
@@ -17,11 +16,6 @@ revision = '1de0b9014901'
 down_revision = '8dff842c714a'
 branch_labels = None
 depends_on = None
-
-tables = ['meal_item_orders', 'vendor_engagements', 'alembic_version',
-          'roles', 'meal_items', 'menus', 'orders', 'vendor_ratings',
-          'activities', 'faqs', 'abouts', 'permissions', 'locations',
-          'vendors', 'user_roles', 'meal_sessions', 'users', 'meal_services']
 
 
 def upgrade():
@@ -36,10 +30,9 @@ def downgrade():
 
 
 def remove_constrainsts():
-    meta = MetaData(bind=op.get_bind())
-    inspector = reflection.Inspector.from_engine(db.engine)
-
-    for table in tables:
+    conn = op.get_bind()
+    inspector = reflection.Inspector.from_engine(conn)
+    for table in db.metadata.tables:
         for x in inspector.get_foreign_keys(table):
             if x.get('name'):
-                op.drop_constraint(x['name'], table)
+                op.drop_constraint(op.f(x['name']), table, type_='foreignkey')
